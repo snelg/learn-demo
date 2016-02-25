@@ -1,0 +1,16 @@
+web:
+  image: snelg/cake3byudev
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - .:/cake
+  links:
+   - mysql
+mysql:
+  image: mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=__DEVPASSWORD__
+  volumes:
+#   - ./devdata:/var/lib/mysql
+   - ./dev-init-data:/docker-entrypoint-initdb.d
