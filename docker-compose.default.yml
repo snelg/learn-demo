@@ -14,3 +14,8 @@ mysql:
   volumes:
 #   - ./devdata:/var/lib/mysql
    - ./dev-init-data:/docker-entrypoint-initdb.d
+setup:
+  image: composer/composer
+  command: install --ignore-platform-reqs
+  volumes:
+   - .:/app

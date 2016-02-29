@@ -4,11 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Learn Controller
+ * Dashboard Controller
  *
  * @property \App\Model\Table\GoalsTable $Goals
+ * @property \App\Model\Table\NotesTable $Notes
+ * @property \App\Model\Table\CanvasTable $Canvas
  */
-class LearnController extends AppController
+class DashboardController extends AppController
 {
 
     /**
