@@ -1,21 +1,30 @@
-web:
-  image: snelg/cake3byudev
-  ports:
-   - "80:80"
-   - "443:443"
-  volumes:
-   - .:/cake
-  links:
-   - mysql
-mysql:
-  image: mysql
-  environment:
-   - MYSQL_ROOT_PASSWORD=__DEVPASSWORD__
-  volumes:
-#   - ./devdata:/var/lib/mysql
-   - ./dev-init-data:/docker-entrypoint-initdb.d
-setup:
-  image: composer/composer
-  command: install --ignore-platform-reqs
-  volumes:
-   - .:/app
+version: '2'
+services:
+  web:
+    image: snelg/cake3byudev
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+     - .:/cake
+    networks:
+     - backend
+    depends_on:
+     - mysql
+  mysql:
+    image: mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=__DEVPASSWORD__
+    volumes:
+#     - ./devdata:/var/lib/mysql
+     - ./dev-init-data:/docker-entrypoint-initdb.d
+    networks:
+     - backend
+  setup:
+    image: composer/composer
+    command: install --ignore-platform-reqs
+    volumes:
+     - .:/app
+networks:
+  backend:
+    driver: bridge
