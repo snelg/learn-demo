@@ -14,10 +14,12 @@ services:
     environment:
      - MYSQL_ROOT_PASSWORD=__DEVPASSWORD__
     volumes:
-#     - ./devdata:/var/lib/mysql
+     - devdata:/var/lib/mysql
      - ./dev-init-data:/docker-entrypoint-initdb.d
   setup:
     image: composer/composer
     command: install --ignore-platform-reqs
     volumes:
      - .:/app
+volumes:
+  devdata:
